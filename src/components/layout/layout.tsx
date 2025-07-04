@@ -6,23 +6,23 @@ import JourneyPlanner from "../journey-planner/journeyPlanner";
 export default function Layout() {
   return (
     <>
-    <Header/>
-      <div style={{ display: "flex", height: "100vh", }}>
-        <aside
-          style={{ width: "25%", padding: "0.5rem", backgroundColor: "#f5f5f5", }}
-        >
-          {<>
+      <Header />
+      <div className="layout-container">
+        <div className="sidebar-section">
+          <div className="search-component">
             <SearchStatus />
-            <JourneyPlanner/>
-            </>
-            /*
-        <JourneyInput />
-        <JourneyOptions /> */
-          }
-        </aside>
+          </div>
+          <div className="journey-component">
+            <JourneyPlanner />
+          </div>
+          <div className="additional-component">
+            <div style={{ padding: "1rem", backgroundColor: "#e9ecef", borderRadius: "4px" }}>
+              Additional Component Placeholder
+            </div>
+          </div>
+        </div>
 
-        {/* Right 2/3 (dynamic content) */}
-        <main style={{ flex: 1, padding: "1rem" }}>
+        <main className="content-section">
           <Outlet />
         </main>
       </div>
