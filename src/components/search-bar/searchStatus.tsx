@@ -12,8 +12,9 @@ export default function SearchStatus() {
         width: "99%",
         "& .MuiOutlinedInput-root": {
           borderRadius: "10px",
+          backgroundColor: '#E1EBEE',
+          height:'2.5rem'
         },
-        backgroundColor: '#E1EBEE'
       }}
       slotProps={{
         input: {
@@ -24,7 +25,7 @@ export default function SearchStatus() {
           ),
         },
       }}
-      placeholder="Search for a station..."
+      placeholder="Get Station Arrivals..."
       onChange={handleStatusSearch}
     />
   );

@@ -5,18 +5,19 @@ export default function Header() {
     <Box
       sx={{
         p: 2,
-        border: "1px  blue",
-        backgroundColor: "blue",
+        backgroundColor: "rgb(0, 25, 168)",
         maxHeight: "7em",
         fontSize: "44px",
         fontWeight: 700,
         display: "flex",
         justifyContent: "center",
         alignContent: "center",
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily:'Johnston Sans',
+        textTransform:'uppercase'
       }}
     >
-      TubeTracker
+      Tube Tracker
     </Box>
   );
 }
