@@ -9,7 +9,7 @@ export default function Line(props: any) {
         display: "flex",
         flexDirection: "row",
         justifyContent: 'space-between',
-        height: "3rem",
+        height: "2rem",
         alignItems:'center',
         color: "black",
         borderRadius: "0.5em",
