@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import Logo from '../../assets/tflLogo.svg'
 
 export default function Header() {
-  //"rgb(0, 25, 168)"
   return (
     <Box
       sx={{
