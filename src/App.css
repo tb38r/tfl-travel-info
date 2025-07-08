@@ -90,4 +90,10 @@ html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+#root{
+  max-width: 1496px;
 }

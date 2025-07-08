@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { TubeLine, TubeLineColors, TubeLineNameMap } from "./types";
-import { StatusColor, SeverityColorMap } from "./types";
+import {  TubeLineColors, TubeLineNameMap } from "./types";
+import { SeverityColorMap } from "./types";
 import Line from "./line";
 
 interface LineStatus {

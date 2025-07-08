@@ -41,33 +41,33 @@ export const TubeLineColors: Record<TubeLine, string> = {
 };
 
 export enum StatusColor {
-  Green = "#4CAF50", // Good Service, No Issues
-  Yellow = "#FFC107", // Minor Delays, Reduced Service, Info
-  Orange = "#FF9800", // Part Closure, Planned Closure, Change of Frequency
-  Red = "#F44336", // Severe Delays, Suspended, Closed
-  Blue = "#2196F3", // Special Service, Bus Service
-  Grey = "#9E9E9E", // Misc (Exit Only, No Step Free Access, etc)
+  Green = "#4CAF50", 
+  Yellow = "#FFC107", 
+  Orange = "#FF9800", 
+  Red = "#F44336",
+  Blue = "#2196F3", 
+  Grey = "#9E9E9E", 
 }
 
 export const SeverityColorMap: Record<number, StatusColor> = {
-  0: StatusColor.Blue, // Special Service
-  1: StatusColor.Red, // Closed
-  2: StatusColor.Red, // Suspended
-  3: StatusColor.Red, // Part Suspended
-  4: StatusColor.Orange, // Planned Closure
-  5: StatusColor.Orange, // Part Closure
-  6: StatusColor.Red, // Severe Delays
-  7: StatusColor.Yellow, // Reduced Service
-  8: StatusColor.Blue, // Bus Service
-  9: StatusColor.Yellow, // Minor Delays
-  10: StatusColor.Green, // Good Service
-  11: StatusColor.Orange, // Part Closed
-  12: StatusColor.Grey, // Exit Only
-  13: StatusColor.Grey, // No Step Free Access
-  14: StatusColor.Orange, // Change of frequency
-  15: StatusColor.Red, // Diverted
-  16: StatusColor.Red, // Not Running
-  17: StatusColor.Yellow, // Issues Reported
-  18: StatusColor.Green, // No Issues
-  19: StatusColor.Yellow, // Information
+  0: StatusColor.Blue, 
+  1: StatusColor.Red,
+  2: StatusColor.Red, 
+  3: StatusColor.Red, 
+  4: StatusColor.Orange, 
+  5: StatusColor.Orange, 
+  6: StatusColor.Red, 
+  7: StatusColor.Yellow, 
+  8: StatusColor.Blue,
+  9: StatusColor.Yellow, 
+  10: StatusColor.Green, 
+  11: StatusColor.Orange,
+  12: StatusColor.Grey, 
+  13: StatusColor.Grey, 
+  14: StatusColor.Orange, 
+  15: StatusColor.Red,
+  16: StatusColor.Red, 
+  17: StatusColor.Yellow, 
+  18: StatusColor.Green, 
+  19: StatusColor.Yellow, 
 };
