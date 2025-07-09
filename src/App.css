@@ -19,6 +19,13 @@ html, body {
   overflow: hidden; 
 }
 
+.home-content {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+}
+
 .sidebar-section {
   width: 40%;
   display: flex;
@@ -58,7 +65,7 @@ html, body {
   width: 60%;
   height: 100%;
   padding: 1rem;
-  background-color: #eaeaea;
+  background-color: ghostwhite;
   overflow: hidden; 
 }
 
@@ -74,36 +81,42 @@ html, body {
   padding-bottom: 200px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .layout-container {
     flex-direction: column;
     height: auto;
+    
   }
 
   .sidebar-section {
     width: 100%;
-    display: contents; /* This removes the sidebar wrapper from the flex layout */
+    display: contents; 
   }
 
   .top-left-section {
-    order: 1; /* First */
+    order: 1;
     width: 100%;
     height: auto;
   }
 
   .right-section {
-    order: 2; /* Second */
+    order: 2; 
     width: 100%;
     height: auto;
     overflow-y: auto;
   }
 
   .bottom-left-section {
-    order: 3; /* Third */
-    width: 100%;
+    order: 3; 
     max-height: 50vh;
   }
   .home-content{
     padding-bottom: 0px;
   }
+
+  html, body {
+
+    overflow: auto; 
+  }
+  
 }

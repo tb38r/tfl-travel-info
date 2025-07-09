@@ -1,5 +1,5 @@
-import homeGif from "../../assets/london-underground-slow.gif";
+import tubeMap from '../../assets/tube-map-final.png'
 
 export default function Home() {
-  return <img className="home-content" src={homeGif} alt="loading..." ></img>;
+  return <img className="home-content" src={tubeMap} alt="loading..." ></img>;
 }

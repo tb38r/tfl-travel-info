@@ -15,8 +15,11 @@ export default function Line(props: any) {
         borderRadius: "0.5em",
         borderLeft: `0.3rem solid ${color}`, 
         paddingX: '10px',
-        backgroundColor: '#E1EBEE'
+        backgroundColor: '#E1EBEE',
+        
+      
       }}
+      elevation={0}
     >
       <span style={{fontWeight: '600'}}>{line}</span>
       <Dot status= {status} color={statusColor}/>
