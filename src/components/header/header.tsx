@@ -1,53 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import Logo from "../../assets/tflLogo.svg";
-import { useEffect, useState } from "react";
-
-interface LineData{
-  stopPoints : any
-}
 
 export default function Header() {
 
-  const [lines, setLines] = useState<LineData |null>(null)
-  const [hasData, setHasData] = useState(false)
-  const [stops, setStops] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(
-          "https://api.tfl.gov.uk/StopPoint/Mode/tube"
-        );
-        if (!response.ok) {
-          console.error("Error fetching line data", response);
-          return;
-        }
-        const data = await response.json();
-        setLines(data);
-        setHasData(true)
-      } catch (err) {
-        console.error("Fetch failed:", err);
-      }
-    })();
-  }, []);
-
-  useEffect(()=>{
-
-    const newStops: Record<string, string> = {};
-
-    lines?.stopPoints.forEach((stop:any) => {
-      if (stop?.commonName && stop?.naptanId && stop?.naptanId.slice(0,3)=="940") {
-        newStops[stop.commonName] = stop.naptanId;
-      }
-    });
-    
-    setStops(newStops);
-    
-  }, [hasData])
-
-
-  console.log("map", lines)
-  console.log("stops", stops)
 
   return (
     <Box
@@ -74,7 +29,7 @@ export default function Header() {
     >
       <div
         className="logo"
-        style={{ height: "70px", width: "70px", zIndex: 1 }}
+        style={{ height: "90px", zIndex: 1 }}
       >
         <img
           src={Logo}
