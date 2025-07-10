@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import SearchStatus from "../search-bar/searchStatus";
+import Arrivals from "../arrivals/arrival";
 import Header from "../header/header";
 import JourneyPlanner from "../journey-planner/journeyPlanner";
 import Lines from "../line-status/lines";
@@ -12,7 +12,7 @@ export default function Layout() {
         <div className="sidebar-section">
           <div className="top-left-section">
             <div className="search-component">
-              <SearchStatus />
+              <Arrivals />
             </div>
             <div
               className="journey-component"
@@ -21,17 +21,17 @@ export default function Layout() {
               <JourneyPlanner />
             </div>
           </div>
-              <div
-                style={{
-                  padding: "5px",
-                  borderRadius: "4px",
-                  color: "black",
-                  fontWeight: "500",
-                  fontSize: "1.2rem",
-                }}
-              >
-                Status Updates
-              </div>
+          <div
+            style={{
+              padding: "5px",
+              borderRadius: "4px",
+              color: "black",
+              fontWeight: "500",
+              fontSize: "1.2rem",
+            }}
+          >
+            Status Updates
+          </div>
           <div className="bottom-left-section">
             <div className="lines-component">
               <Lines />
