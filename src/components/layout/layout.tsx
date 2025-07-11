@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Arrivals from "../arrivals/arrival";
+import Arrivals from "../arrivals/arrivals";
 import Header from "../header/header";
 import JourneyPlanner from "../journey-planner/journeyPlanner";
 import Lines from "../line-status/lines";

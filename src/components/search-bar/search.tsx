@@ -1,6 +1,6 @@
 import { TextField, Autocomplete } from "@mui/material";
 import { useMemo } from "react";
-import { StopPoints } from "./types/stops";
+import { StopPoints } from "./stop-points/stops";
 
 interface searchProps {
   updateStation: (v: string) => void;
@@ -15,13 +15,11 @@ export default function Search({ updateStation }: searchProps) {
       options={inputValues}
       autoComplete={true}
       autoHighlight
+      clearOnBlur
       onInputChange={(_, newValue: string) => {
         updateStation(newValue);
       }}
-      // slotProps={{
-      //   listbox: { sx: { maxHeight: { s: "10px", lg: "50px" } } },
-      // }}
-
+  
       renderInput={(params) => (
         <TextField
           {...params}

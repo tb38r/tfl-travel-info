@@ -6,6 +6,7 @@ export default function Header() {
 
   return (
     <Box
+   
       sx={{
         p: 3,
         background: "linear-gradient(135deg, #0019A8 0%, #1976D2 100%)",
@@ -14,7 +15,6 @@ export default function Header() {
         alignItems: "center",
         gap: 2,
         position: "relative",
-        overflow: "hidden",
         "&::before": {
           content: '""',
           position: "absolute",
@@ -23,9 +23,10 @@ export default function Header() {
           right: 0,
           bottom: 0,
           background:
-            "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)",
-        },
+            "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)",        
+          },
       }}
+    
     >
       <div
         className="logo"

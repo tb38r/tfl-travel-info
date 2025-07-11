@@ -14,7 +14,8 @@ export default function JourneyPlanner() {
         flexDirection: "column",
         justifyContent: "space-evenly",
         height:'100%',
-        textAlign: 'left'
+        textAlign: 'left',
+        padding: '0.5rem'
       }}
     >
       <span style={{ color: "grey", fontWeight: "900" }}>Journey Planner</span>
