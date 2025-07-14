@@ -1,4 +1,5 @@
 import { Paper } from "@mui/material";
+import { useMemo } from "react";
 
 interface ArrivalCardsProps {
   line: string;
@@ -6,33 +7,40 @@ interface ArrivalCardsProps {
   destination: string;
   duetime: string;
 }
-/*
-const datetime = "2025-07-09T11:25:25Z";
-const date = new Date(datetime);
-const localTime = date.toLocaleTimeString('en-GB', { 
-  hour: '2-digit', 
-  minute: '2-digit' 
-});
 
-
-*/
 export default function ArrivalCards(props: ArrivalCardsProps) {
   const { line, platform, destination, duetime } = props;
+  //const [time, setTime] = useState("")
+
+  const time = useMemo(() => {
+    const date = new Date(duetime);
+    const localTime = date.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return localTime || duetime;
+  }, [duetime]);
 
   return (
-    <Paper
-      sx={{
-        border: "red",
-        color: "black",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
-      <span>{line}</span>
-      <span>{duetime}</span>
-      <span>{destination}</span>
-      <span>{platform}</span>
-    </Paper>
+    <div>
+      <div>
+        <Paper
+          sx={{
+            border: "red",
+            color: "black",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            width: "fit-content",
+          }}
+          className="arrivals-card"
+        >
+          <span>{line}</span>
+          <span>{time}</span>
+          <span>{destination}</span>
+          <span>{platform}</span>
+        </Paper>
+      </div>
+    </div>
   );
 }

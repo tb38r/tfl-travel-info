@@ -18,7 +18,7 @@ export default function JourneyPlanner() {
         padding: '0.5rem'
       }}
     >
-      <span style={{ color: "grey", fontWeight: "900" }}>Journey Planner</span>
+      <span style={{ color: "black", fontWeight: "500" }}>Journey Planner</span>
       <PlannerInput placeholder="From station" />
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <IconButton onClick={handleJourneySearch}>

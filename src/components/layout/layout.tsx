@@ -27,7 +27,7 @@ export default function Layout() {
               borderRadius: "4px",
               color: "black",
               fontWeight: "500",
-              fontSize: "1.2rem",
+              paddingLeft:"0.75rem"
             }}
           >
             Status Updates

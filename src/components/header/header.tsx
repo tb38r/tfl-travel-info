@@ -1,12 +1,17 @@
 import { Box, Typography } from "@mui/material";
 import Logo from "../../assets/tflLogo.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+const navigate = useNavigate()
 
+  const handleHome = () =>{
+    navigate("/")
+  }
 
   return (
     <Box
-   
+    onClick={handleHome}
       sx={{
         p: 3,
         background: "linear-gradient(135deg, #0019A8 0%, #1976D2 100%)",
@@ -25,6 +30,7 @@ export default function Header() {
           background:
             "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)",        
           },
+        
       }}
     
     >
@@ -32,6 +38,7 @@ export default function Header() {
         className="logo"
         style={{ height: "90px", zIndex: 1 }}
       >
+      
         <img
           src={Logo}
           style={{
@@ -41,6 +48,7 @@ export default function Header() {
             filter: "brightness(0) invert(1)",
           }}
         />
+      
       </div>
       <Typography
         variant="h2"
@@ -52,6 +60,8 @@ export default function Header() {
           textTransform: "uppercase",
           zIndex: 1,
           position: "relative",
+          cursor: "pointer",
+       
         }}
       >
         TUBE TRACKER

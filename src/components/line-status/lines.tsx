@@ -9,7 +9,7 @@ interface LineStatus {
   reason?: string;
 }
 
-interface TubeLineEntity {
+interface TubeData {
   id: string;
   name: string;
   modeName: string;
@@ -17,7 +17,7 @@ interface TubeLineEntity {
 }
 
 export default function Lines() {
-  const [lines, setLines] = useState<TubeLineEntity[]>([]);
+  const [lines, setLines] = useState<TubeData[]>([]);
 
   useEffect(() => {
     (async () => {
