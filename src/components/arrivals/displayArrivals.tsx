@@ -26,6 +26,10 @@ export default function DisplayArrivals() {
   const { tubestop } = useParams();
   const [isInValid, setIsInValid] = useState(true);
   const [allData, setAllData] = useState<ArrivalsResponse>([]);
+  const [lineSelected, setLineSelected] = useState("");
+  const [selectedButton, setSelectedButton] = useState(999);
+
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -75,7 +79,9 @@ export default function DisplayArrivals() {
     [allData]
   );
 
-  const handleSelectedLine = (line: string) => {
+  const handleSelectedLine = (line: string, index: number) => {
+    setSelectedButton(index)
+    setLineSelected(line);
     console.log(line);
   };
 
@@ -85,27 +91,38 @@ export default function DisplayArrivals() {
     <div className="arrivals-container">
       <div className="arrivals-title">{tubestop} Arrivals</div>
       <div className="arrivals-buttons">
-        {availableLines.map((line) => (
+        {availableLines.map((line, index) => (
           <ThemeProvider theme={ButtonsTheme}>
             <Button
-              key={line}
-              variant="contained"
+              key={index}
+              variant={selectedButton === index ? "contained" : "outlined"}
               sx={{ backgroundColor: `${line}.main`, cursor: "pointer" }}
-              onClick={() => handleSelectedLine(line)}
+              onClick={() => handleSelectedLine(line, index)}
             >
               {line}
             </Button>
           </ThemeProvider>
         ))}
       </div>
-      <div style={{ color: "black" }}>
-        <ArrivalCards
-          line={allData[0]?.lineName}
-          platform={allData[0]?.platformName}
-          destination={allData[0]?.towards}
-          duetime={allData[0]?.expectedArrival}
-        />
-      </div>
+
+      {!lineSelected ? (
+        <div className="arrivals-helper-text"></div>
+      ) : (
+        <div className="arrival-cards-container">
+          {allData
+            .filter((line) => {
+              return line.lineName === lineSelected;
+            })
+            .map((line, index) => (
+              <ArrivalCards
+                key={index}
+                platform={line?.platformName}
+                destination={line?.towards}
+                duetime={line?.expectedArrival}
+              />
+            ))}
+        </div>
+      )}
     </div>
   ) : (
     <CircularProgress

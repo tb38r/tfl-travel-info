@@ -1,4 +1,7 @@
 .arrivals-container {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .arrivals-title {
@@ -9,4 +12,20 @@
 .arrivals-buttons {
   display: flex;
   gap: 0.5rem;
+}
+
+.arrivals-helper-text {
+  color:darkgray;
+}
+
+.arrivals-line-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.arrival-cards-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
 }

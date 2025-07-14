@@ -2,15 +2,14 @@ import { Paper } from "@mui/material";
 import { useMemo } from "react";
 
 interface ArrivalCardsProps {
-  line: string;
   platform: string;
   destination: string;
   duetime: string;
+  key:number
 }
 
 export default function ArrivalCards(props: ArrivalCardsProps) {
-  const { line, platform, destination, duetime } = props;
-  //const [time, setTime] = useState("")
+  const {  platform, destination, duetime, key } = props;
 
   const time = useMemo(() => {
     const date = new Date(duetime);
@@ -26,19 +25,20 @@ export default function ArrivalCards(props: ArrivalCardsProps) {
       <div>
         <Paper
           sx={{
-            border: "red",
             color: "black",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             width: "fit-content",
+            padding:'10px'
+
           }}
+          key={key}
           className="arrivals-card"
         >
-          <span>{line}</span>
-          <span>{time}</span>
-          <span>{destination}</span>
-          <span>{platform}</span>
+          <span className="arrivals-line-item"> {platform}</span>
+          <span className="arrivals-line-item"><span>&#9200;</span> {time}</span>
+          <span className="arrivals-line-item"><span>&#128205;</span> {destination}</span>
         </Paper>
       </div>
     </div>
