@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { StopPoints } from "../search-bar/stop-points/stops";
 import { CircularProgress, Button, ThemeProvider } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
-import Arrivals from "./arrivals";
 import ArrivalCards from "./arrivalCards";
 import { ButtonsTheme } from "./arrivalsTheme";
 
@@ -101,9 +100,7 @@ export default function DisplayArrivals() {
         ))}
       </div>
 
-      {!lineSelected ? (
-        <div className="arrivals-helper-text"></div>
-      ) : (
+      {lineSelected && (
         <div className="arrival-cards-container">
           {allData
             ?.filter((line) => {
@@ -115,7 +112,7 @@ export default function DisplayArrivals() {
               const dateB = new Date(b.expectedArrival);
 
               if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
-                return 0; 
+                return 0;
               }
 
               return dateA.getTime() - dateB.getTime();

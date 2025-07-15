@@ -18,28 +18,7 @@ export default function Arrivals() {
 
   }, [station]);
 
-  return <Search updateStation={updateStation} />;
+  return <Search updateStation={updateStation} placeholder="Get Station Arrivals"/>;
 }
 
-// const arrivalObj = {
-//   destination: "",
-//   error: false,
-//   errorMsg: "",
-// };
 
-// function reducer(state: object, action: string) {
-//   if (!(action in StopPoints)) {
-//     return {
-//       destination: action,
-//       error: true,
-//       errorMsg: `Invalid station -  ${action} `,
-//     };
-//   }
-
-//   return {
-//     destination: action,
-//     error: false,
-//     errorMsg: "",
-//   };
-// }
-// const [arrivalState, dispatch] = useReducer(reducer, arrivalObj);

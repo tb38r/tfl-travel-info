@@ -4,22 +4,22 @@ import { StopPoints } from "./stop-points/stops";
 
 interface searchProps {
   updateStation: (v: string) => void;
+  placeholder: string;
 }
 
-export default function Search({ updateStation }: searchProps) {
+export default function Search({ updateStation, placeholder }: searchProps) {
   const inputValues = useMemo(() => Object.keys(StopPoints), [StopPoints]);
 
   return (
     <Autocomplete
       disablePortal
       options={inputValues}
-      autoComplete={true}
+      autoComplete
       autoHighlight
       clearOnBlur
       onInputChange={(_, newValue: string) => {
         updateStation(newValue);
       }}
-  
       renderInput={(params) => (
         <TextField
           {...params}
@@ -30,7 +30,7 @@ export default function Search({ updateStation }: searchProps) {
               height: "2.5rem",
             },
           }}
-          placeholder="Get Station Arrivals"
+          placeholder={`${placeholder}`}
         />
       )}
     />

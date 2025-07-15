@@ -5,11 +5,10 @@ interface ArrivalCardsProps {
   platform: string;
   destination: string;
   duetime: string;
-  key:number
 }
 
 export default function ArrivalCards(props: ArrivalCardsProps) {
-  const {  platform, destination, duetime, key } = props;
+  const {  platform, destination, duetime } = props;
 
   const time = useMemo(() => {
     const date = new Date(duetime);
@@ -33,7 +32,6 @@ export default function ArrivalCards(props: ArrivalCardsProps) {
             padding:'10px'
 
           }}
-          key={key}
           className="arrivals-card"
         >
           <span className="arrivals-line-item"> {platform}</span>
