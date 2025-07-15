@@ -2,16 +2,20 @@
   gap: 10px;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .arrivals-title {
   color: black;
   font-size: 2rem;
+  flex-shrink: 0;
 }
 
 .arrivals-buttons {
   display: flex;
   gap: 0.5rem;
+  flex-shrink: 0;
+
 }
 
 .arrivals-helper-text {
@@ -23,9 +27,12 @@
   justify-content: space-between;
 }
 
-.arrival-cards-container{
+.arrival-cards-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-
+  flex: 0.8; 
+  overflow-y: auto; 
+  min-height: 0;
+  padding-bottom: 1.2rem;
 }

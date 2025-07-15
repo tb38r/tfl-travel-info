@@ -29,7 +29,6 @@ export default function DisplayArrivals() {
   const [lineSelected, setLineSelected] = useState("");
   const [selectedButton, setSelectedButton] = useState(999);
 
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -80,21 +79,18 @@ export default function DisplayArrivals() {
   );
 
   const handleSelectedLine = (line: string, index: number) => {
-    setSelectedButton(index)
+    setSelectedButton(index);
     setLineSelected(line);
-    console.log(line);
   };
-
-  console.log(availableLines);
 
   return !loading && !isInValid ? (
     <div className="arrivals-container">
       <div className="arrivals-title">{tubestop} Arrivals</div>
       <div className="arrivals-buttons">
         {availableLines.map((line, index) => (
-          <ThemeProvider theme={ButtonsTheme}>
+          <ThemeProvider theme={ButtonsTheme} key={line}>
             <Button
-              key={index}
+              key={line}
               variant={selectedButton === index ? "contained" : "outlined"}
               sx={{ backgroundColor: `${line}.main`, cursor: "pointer" }}
               onClick={() => handleSelectedLine(line, index)}
@@ -110,10 +106,21 @@ export default function DisplayArrivals() {
       ) : (
         <div className="arrival-cards-container">
           {allData
-            .filter((line) => {
+            ?.filter((line) => {
               return line.lineName === lineSelected;
             })
-            .map((line, index) => (
+            .slice()
+            .sort((a, b) => {
+              const dateA = new Date(a.expectedArrival);
+              const dateB = new Date(b.expectedArrival);
+
+              if (isNaN(dateA.getTime()) || isNaN(dateB.getTime())) {
+                return 0; 
+              }
+
+              return dateA.getTime() - dateB.getTime();
+            })
+            ?.map((line, index) => (
               <ArrivalCards
                 key={index}
                 platform={line?.platformName}
