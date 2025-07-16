@@ -3,6 +3,7 @@ import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircleOutlin
 import Search from "../search-bar/search";
 import { StopPoints } from "../search-bar/stop-points/stops";
 import { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Action =
   | { type: "from"; destination: string }
@@ -31,7 +32,7 @@ function reducer(state: State, action: Action): State {
     return {
       ...state,
       error: true,
-      errorMsg: `Invalid station : ${action.destination}`,
+      errorMsg: `Error : ${action.destination}`,
     };
   }
 
@@ -68,6 +69,8 @@ export default function JourneyPlanner() {
     journeyPlannerObj
   );
 
+  const navigate = useNavigate()
+
   const handleFromDestination = (dest: string) => {
     dispatch({ type: "from", destination: dest });
   };
@@ -77,16 +80,17 @@ export default function JourneyPlanner() {
   };
 
   const handleSubmit = () => {
-    if (!journeyPlannerState.to || !journeyPlannerState.from) {
+    if (!journeyPlannerState.from || !journeyPlannerState.to) {
       return;
     }
 
-    if (journeyPlannerState.to === journeyPlannerState.from) {
+    if (journeyPlannerState.from === journeyPlannerState.to) {
       dispatch({
         type: "error",
-        destination: "Cannot navigate to & from the same destination",
+        destination: "Cannot navigate travel to & from the same destination",
       });
     } else {
+      navigate(`/journey/${journeyPlannerState.from }/${journeyPlannerState.to }`)
       console.log(journeyPlannerState.from, journeyPlannerState.to);
     }
   };
