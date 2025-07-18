@@ -26,7 +26,7 @@ export default function Search({ updateStation, placeholder }: searchProps) {
           sx={{
             "& .MuiOutlinedInput-root": {
               borderRadius: "10px",
-              backgroundColor: "#E1EBEE",
+              backgroundColor: "white",
               height: "2.5rem",
             },
           }}

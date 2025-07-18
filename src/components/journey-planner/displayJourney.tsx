@@ -3,12 +3,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LinearProgress } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
-import type {
-  JourneyResult,
-
-} from "./types/journey-types";
+import type { JourneyResult } from "./types/journey-types";
 import { formatTime } from "../../utils/helpers";
-import './styles/journey-planner.css'
+import "./styles/journey-planner.css";
 
 export default function DisplayJourney() {
   const { from, to } = useParams();
@@ -21,13 +18,17 @@ export default function DisplayJourney() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
+    setData(undefined);
+
     if (
       from &&
       from in UndergroundStations &&
       to &&
       to in UndergroundStations
     ) {
+      setError(false);
       setIsInValid(false);
+      setLoading(true);
     } else {
       setIsInValid(true);
       setLoading(false);
@@ -37,8 +38,9 @@ export default function DisplayJourney() {
   }, [from, to]);
 
   useEffect(() => {
-    setLoading(true);
     if (!isInValid) {
+      setLoading(true);
+
       const fromDest =
         UndergroundStations[from as keyof typeof UndergroundStations];
       const toDest =
@@ -56,15 +58,14 @@ export default function DisplayJourney() {
             setErrorMsg(`Unable to retrieve data for ${from} to ${to}`);
             return;
           }
+
           const data = await response.json();
           setData(data);
           setLoading(false);
         } catch (err) {
           setLoading(false);
           setError(true);
-
           let message = `An unexpected error occurred`;
-
           if (err instanceof Error) {
             message = `Unable to retrieve data for ${from} to ${to} \n ${err.message}`;
           }
@@ -73,33 +74,59 @@ export default function DisplayJourney() {
         }
       })();
     }
-    setLoading(false);
-  }, [isInValid, from, to]);
+  }, [isInValid, from, to, apiKey]);
+
   console.log("data from Journey", data);
 
   return (
     <>
-      {loading && <LinearProgress color="secondary" />}
-      {error && <div style={{ color: "red" }}>{errorMsg}</div>}
-  
-      <div className="display-journeys">
-  {data?.journeys?.map((journey, index) => (
-    <div key={index}>
-      <div className="leg-total-duration">
-        {journey.duration} 
-      </div>
-      {journey.legs.map((leg, legIndex) => (
-        <div key={legIndex} className="leg-row-item">
-          {formatTime(leg.departureTime)}
-          <br/>
-          {leg.instruction.summary}  
-          <span className="leg-item-duration">{leg.duration}</span>
+      <div>Debug - Loading: {loading.toString()}</div>
+
+      {loading && (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {
+            <span style={{ color: "black" }}>
+              Getting your routes from {from} to {to}
+            </span>
+          }
+          <br />
+          <span></span>
+          <LinearProgress
+            color="secondary"
+            sx={{ width: "100%", display: "block" }}
+          />
         </div>
-      ))}
-      <br/>
-    </div>
-  ))}
-</div>
+      )}
+      {error && <div style={{ color: "red" }}>Error: {errorMsg}</div>}
+
+      <div className="display-journeys">
+        <>
+          {data && <div className="journey-title">Journey results</div>}
+          {data &&
+            data?.journeys?.map((journey, index) => (
+              <div key={index} className="journey-leg-card">
+                {journey.legs.map((leg) => (
+                  <>
+                    <div className="leg-row-item">
+                      <span>{leg.instruction.summary} </span>
+                      <span className="leg-item-duration">
+                        {" "}
+                        {formatTime(leg.departureTime)}
+                      </span>
+                    </div>
+                  </>
+                ))}
+                <div className="leg-row-item">
+                  <span>Travel Time</span>
+                  <span className="leg-item-duration">
+                    {" "}
+                    {journey.duration}mins
+                  </span>
+                </div>
+              </div>
+            ))}
+        </>
+      </div>
     </>
   );
 }
