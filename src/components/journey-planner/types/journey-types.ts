@@ -1,4 +1,9 @@
-export type JourneyResult = Journey[];
+//export type JourneyResult = Journey[];
+
+export type JourneyResult ={
+  journeys : Journey[];
+  lines : []
+}
 
 export interface Journey {
   startDateTime: string;

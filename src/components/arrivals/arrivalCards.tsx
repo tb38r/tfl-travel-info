@@ -1,5 +1,6 @@
 import { Paper } from "@mui/material";
 import { useMemo } from "react";
+import { formatTime } from "../../utils/helpers";
 
 interface ArrivalCardsProps {
   platform: string;
@@ -8,16 +9,13 @@ interface ArrivalCardsProps {
 }
 
 export default function ArrivalCards(props: ArrivalCardsProps) {
-  const {  platform, destination, duetime } = props;
+  const { platform, destination, duetime } = props;
 
-  const time = useMemo(() => {
-    const date = new Date(duetime);
-    const localTime = date.toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    return localTime || duetime;
-  }, [duetime]);
+  const time = useMemo(
+    () => formatTime(duetime),
+
+    [duetime]
+  );
 
   return (
     <div>
@@ -29,14 +27,17 @@ export default function ArrivalCards(props: ArrivalCardsProps) {
             flexDirection: "column",
             justifyContent: "center",
             width: "fit-content",
-            padding:'10px'
-
+            padding: "10px",
           }}
           className="arrivals-card"
         >
           <span className="arrivals-line-item"> {platform}</span>
-          <span className="arrivals-line-item"><span>&#9200;</span> {time}</span>
-          <span className="arrivals-line-item"><span>&#128205;</span> {destination}</span>
+          <span className="arrivals-line-item">
+            <span>&#9200;</span> {time}
+          </span>
+          <span className="arrivals-line-item">
+            <span>&#128205;</span> {destination}
+          </span>
         </Paper>
       </div>
     </div>

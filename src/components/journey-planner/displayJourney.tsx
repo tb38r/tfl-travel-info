@@ -5,13 +5,10 @@ import { LinearProgress } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
 import type {
   JourneyResult,
-  Journey,
-  Leg,
-  Instruction,
-  Obstacle,
-  StopPoint,
-  RouteOption,
+
 } from "./types/journey-types";
+import { formatTime } from "../../utils/helpers";
+import './styles/journey-planner.css'
 
 export default function DisplayJourney() {
   const { from, to } = useParams();
@@ -19,7 +16,7 @@ export default function DisplayJourney() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [data, setData] = useState<JourneyResult>([]);
+  const [data, setData] = useState<JourneyResult>();
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -30,7 +27,6 @@ export default function DisplayJourney() {
       to &&
       to in UndergroundStations
     ) {
-      console.log("is valid!");
       setIsInValid(false);
     } else {
       setIsInValid(true);
@@ -61,8 +57,8 @@ export default function DisplayJourney() {
             return;
           }
           const data = await response.json();
-          setLoading(false);
           setData(data);
+          setLoading(false);
         } catch (err) {
           setLoading(false);
           setError(true);
@@ -80,16 +76,30 @@ export default function DisplayJourney() {
     setLoading(false);
   }, [isInValid, from, to]);
   console.log("data from Journey", data);
-  
+
   return (
     <>
       {loading && <LinearProgress color="secondary" />}
       {error && <div style={{ color: "red" }}>{errorMsg}</div>}
-      <div className="demo" style={{ color: "black" }}>
-        {from}
-        <br />
-        {to}
+  
+      <div className="display-journeys">
+  {data?.journeys?.map((journey, index) => (
+    <div key={index}>
+      <div className="leg-total-duration">
+        {journey.duration} 
       </div>
+      {journey.legs.map((leg, legIndex) => (
+        <div key={legIndex} className="leg-row-item">
+          {formatTime(leg.departureTime)}
+          <br/>
+          {leg.instruction.summary}  
+          <span className="leg-item-duration">{leg.duration}</span>
+        </div>
+      ))}
+      <br/>
+    </div>
+  ))}
+</div>
     </>
   );
 }
