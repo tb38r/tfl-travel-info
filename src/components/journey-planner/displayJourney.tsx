@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 // import { StopPoints } from "../search-bar/stop-points/stops";
-import { useEffect, useState } from "react";
-import { LinearProgress } from "@mui/material";
+import { useEffect, useState, useCallback } from "react";
+import { LinearProgress, Tooltip, styled,tooltipClasses} from "@mui/material";
+import type { TooltipProps } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
 import type { JourneyResult } from "./types/journey-types";
 import { formatTime } from "../../utils/helpers";
+import BookmarkAdd from "@mui/icons-material/BookmarkAdd";
 import "./styles/journey-planner.css";
 
 export default function DisplayJourney() {
@@ -16,6 +18,18 @@ export default function DisplayJourney() {
   const [data, setData] = useState<JourneyResult>();
 
   const apiKey = import.meta.env.VITE_API_KEY;
+
+  const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: '#1976D2',
+      boxShadow: theme.shadows[1],
+      fontSize: 13,
+    
+    },
+  }));
 
   useEffect(() => {
     setData(undefined);
@@ -76,46 +90,64 @@ export default function DisplayJourney() {
     }
   }, [isInValid, from, to, apiKey]);
 
+  const handleSave = () => {
+    console.log("handleSave");
+  };
+
   console.log("data from Journey", data);
 
   return (
     <>
-      <div>Debug - Loading: {loading.toString()}</div>
-
-      {loading && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {
-            <span style={{ color: "black" }}>
-              Getting your routes from {from} to {to}
-            </span>
-          }
-          <br />
-          <span></span>
-          <LinearProgress
-            color="secondary"
-            sx={{ width: "100%", display: "block" }}
-          />
-        </div>
-      )}
-      {error && <div style={{ color: "red" }}>Error: {errorMsg}</div>}
-
       <div className="display-journeys">
+        {loading && (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {
+              <span style={{ color: "black" }}>
+                Getting your routes from {from} to {to}
+              </span>
+            }
+            <br />
+            <span></span>
+            <LinearProgress
+              color="secondary"
+              sx={{ width: "100%", display: "block" }}
+            />
+          </div>
+        )}
+        {error && <div style={{ color: "red" }}>Error: {errorMsg}</div>}
+
         <>
-          {data && <div className="journey-title">Journey results</div>}
+          {data && (
+            <div className="title-container">
+              <div className="journey-title">Journey results</div>
+              <div className="journey-subtitle">
+                {from?.replace(" Underground Station", "") || from} {"to"}{" "}
+                {to?.replace(" Underground Station", "") || to}
+                <span
+                  onClick={() => handleSave()}
+                  style={{ cursor: "pointer" }}
+                >
+                  <LightTooltip title="Save Journey" placement="left"  style={{ color: 'purple' }} >
+                    <BookmarkAdd />
+                  </LightTooltip>
+                </span>
+              </div>
+            </div>
+          )}
           {data &&
             data?.journeys?.map((journey, index) => (
               <div key={index} className="journey-leg-card">
-                {journey.legs.map((leg) => (
-                  <>
-                    <div className="leg-row-item">
+                <>
+                  {journey.legs.map((leg, index) => (
+                    <div key={index} className="leg-row-item">
                       <span>{leg.instruction.summary} </span>
                       <span className="leg-item-duration">
                         {" "}
                         {formatTime(leg.departureTime)}
                       </span>
                     </div>
-                  </>
-                ))}
+                  ))}
+                </>
                 <div className="leg-row-item">
                   <span>Travel Time</span>
                   <span className="leg-item-duration">
