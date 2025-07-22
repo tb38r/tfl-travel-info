@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 // import { StopPoints } from "../search-bar/stop-points/stops";
 import { useEffect, useState, useCallback } from "react";
-import { LinearProgress, Tooltip, styled,tooltipClasses} from "@mui/material";
+import { LinearProgress, Tooltip, styled, tooltipClasses } from "@mui/material";
 import type { TooltipProps } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
 import type { JourneyResult } from "./types/journey-types";
 import { formatTime } from "../../utils/helpers";
 import BookmarkAdd from "@mui/icons-material/BookmarkAdd";
 import "./styles/journey-planner.css";
+import { useLocaLStore, type JourneyObject } from "../hooks/useLocalStore";
+import { CloseFullscreen } from "@mui/icons-material";
 
 export default function DisplayJourney() {
   const { from, to } = useParams();
@@ -16,6 +18,7 @@ export default function DisplayJourney() {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [data, setData] = useState<JourneyResult>();
+  const [journies, saveJourney] = useLocaLStore();
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -24,10 +27,9 @@ export default function DisplayJourney() {
   ))(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
       backgroundColor: theme.palette.common.white,
-      color: '#1976D2',
+      color: "#1976D2",
       boxShadow: theme.shadows[1],
       fontSize: 13,
-    
     },
   }));
 
@@ -90,9 +92,12 @@ export default function DisplayJourney() {
     }
   }, [isInValid, from, to, apiKey]);
 
-  const handleSave = () => {
-    console.log("handleSave");
-  };
+  const SaveToLocalStorage = useCallback(() => {
+    const journeyToSave: JourneyObject = {
+      [`${from}`]: `${to}`,
+    };
+    saveJourney(journeyToSave);
+  }, [from, to]);
 
   console.log("data from Journey", data);
 
@@ -124,10 +129,14 @@ export default function DisplayJourney() {
                 {from?.replace(" Underground Station", "") || from} {"to"}{" "}
                 {to?.replace(" Underground Station", "") || to}
                 <span
-                  onClick={() => handleSave()}
+                  onClick={() => SaveToLocalStorage()}
                   style={{ cursor: "pointer" }}
                 >
-                  <LightTooltip title="Save Journey" placement="left"  style={{ color: 'purple' }} >
+                  <LightTooltip
+                    title="Save Journey"
+                    placement="left"
+                    style={{ color: "purple" }}
+                  >
                     <BookmarkAdd />
                   </LightTooltip>
                 </span>
