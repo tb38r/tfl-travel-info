@@ -21,9 +21,7 @@ export default function Layout() {
             >
               <JourneyPlanner />
             </div>
-            <div className="favourites-component">
               <Favourites/>
-              </div>
           </div>
           <div
             style={{

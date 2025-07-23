@@ -1,5 +1,5 @@
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import './favourites.css'
+import "./favourites.css";
 
 interface FavItemProps {
   from: string;
@@ -11,9 +11,9 @@ export default function FavouriteItem(props: FavItemProps) {
 
   return (
     <div className="fav-line-item">
-      {from}
+     <span> {from?.replace(" Underground Station", "") || from} </span>
       <ArrowRightAltIcon />
-      {to}
+      <span> {to?.replace(" Underground Station", "") || to}</span>
     </div>
   );
 }

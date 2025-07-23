@@ -5,7 +5,7 @@ import type { TooltipProps } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
 import type { JourneyResult } from "./types/journey-types";
 import { formatTime } from "../../utils/helpers";
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./styles/journey-planner.css";
 import { useLocaLStore, type JourneyObject } from "../hooks/useLocalStore";
 
@@ -94,8 +94,8 @@ export default function DisplayJourney() {
     let id = Math.random().toString(36).substring(2, 6);
 
     const journeyToSave: JourneyObject = {
-      [`${from}`]: `${to}`,
-      [`${from}`]: `${to}`,
+      [`from`]: `${from}`,
+      [`to`]: `${to}`,
       [`id`]: id,
     };
     saveJourney(journeyToSave);

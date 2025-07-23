@@ -1,18 +1,26 @@
 import { useLocaLStore } from "../hooks/useLocalStore";
 import { Container } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import type { Journey } from "../journey-planner/types/journey-types";
+import FavouriteItem from "./favourite-item";
 import "./favourites.css";
-import { CallMerge } from "@mui/icons-material";
+
+interface Items {
+  from: string;
+  to: string;
+  id: string;
+}
 
 export default function Favourites() {
   const [favourites, _] = useLocaLStore();
 
   const favToJSON = favourites ? JSON.parse(favourites) : [];
-  console.log('fav to j', favToJSON)
-
+  console.log("fav to j", favToJSON);
 
   return (
     favourites && (
+        <div className="favourites-component">
+
       <Container
         disableGutters
         sx={{
@@ -23,17 +31,18 @@ export default function Favourites() {
           padding: "0.5rem",
         }}
       >
-        <div className="favourites-container">
           <div className="fav-title-container">
             <div className="favourites-title">Favourites</div>
-            <span style={{ color: "#9932CC" }}>
-              <BookmarkIcon />
-            </span>
+         
           </div>
+        <div className="favourites-container">
+          {favToJSON.map((item: Items) => {
+            return <FavouriteItem from={item.from} to={item.to} key={item.id}/>;
+          })}
 
-          <div className="favorites-items">{favourites}</div>
         </div>
       </Container>
+      </div>
     )
   );
 }
