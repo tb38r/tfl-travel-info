@@ -3,6 +3,7 @@ import Arrivals from "../arrivals/arrivals";
 import Header from "../header/header";
 import JourneyPlanner from "../journey-planner/journeyPlanner";
 import Lines from "../line-status/lines";
+import Favourites from "../favourites/favourites";
 
 export default function Layout() {
   return (
@@ -20,6 +21,9 @@ export default function Layout() {
             >
               <JourneyPlanner />
             </div>
+            <div className="favourites-component">
+              <Favourites/>
+              </div>
           </div>
           <div
             style={{

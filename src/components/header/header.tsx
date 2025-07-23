@@ -19,6 +19,7 @@ const navigate = useNavigate()
         justifyContent: "center",
         alignItems: "center",
         gap: 2,
+        height: '2rem',
         position: "relative",
         "&::before": {
           content: '""',
@@ -36,7 +37,7 @@ const navigate = useNavigate()
     >
       <div
         className="logo"
-        style={{ height: "90px", zIndex: 1 }}
+        style={{ height: "3.5rem", zIndex: 1 }}
       >
       
         <img
@@ -55,7 +56,7 @@ const navigate = useNavigate()
         sx={{
           color: "white",
           fontWeight: 800,
-          fontSize: "3.2rem",
+          fontSize: "2.6rem",
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           zIndex: 1,

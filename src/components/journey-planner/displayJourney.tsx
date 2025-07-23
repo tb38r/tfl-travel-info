@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
-// import { StopPoints } from "../search-bar/stop-points/stops";
 import { useEffect, useState, useCallback } from "react";
 import { LinearProgress, Tooltip, styled, tooltipClasses } from "@mui/material";
 import type { TooltipProps } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
 import type { JourneyResult } from "./types/journey-types";
 import { formatTime } from "../../utils/helpers";
-import BookmarkAdd from "@mui/icons-material/BookmarkAdd";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import "./styles/journey-planner.css";
 import { useLocaLStore, type JourneyObject } from "../hooks/useLocalStore";
-import { CloseFullscreen } from "@mui/icons-material";
 
 export default function DisplayJourney() {
   const { from, to } = useParams();
@@ -18,7 +16,7 @@ export default function DisplayJourney() {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [data, setData] = useState<JourneyResult>();
-  const [journies, saveJourney] = useLocaLStore();
+  const [_, saveJourney] = useLocaLStore();
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -93,8 +91,12 @@ export default function DisplayJourney() {
   }, [isInValid, from, to, apiKey]);
 
   const SaveToLocalStorage = useCallback(() => {
+    let id = Math.random().toString(36).substring(2, 6);
+
     const journeyToSave: JourneyObject = {
       [`${from}`]: `${to}`,
+      [`${from}`]: `${to}`,
+      [`id`]: id,
     };
     saveJourney(journeyToSave);
   }, [from, to]);
@@ -135,9 +137,9 @@ export default function DisplayJourney() {
                   <LightTooltip
                     title="Save Journey"
                     placement="left"
-                    style={{ color: "purple" }}
+                    style={{ color: "#C71585" }}
                   >
-                    <BookmarkAdd />
+                    <FavoriteIcon />
                   </LightTooltip>
                 </span>
               </div>

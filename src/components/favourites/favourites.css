@@ -1,0 +1,29 @@
+.favourites-container{
+    background-color: rgb(225, 235, 238);
+    border-radius: 5px;
+}
+
+.fav-title-container{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.favorites-items{
+   max-height:  150px;
+    border-radius: 5px;
+    color: black;
+  
+  }
+
+  .favourites-title{
+    color: black;
+    font-weight: 500;
+  }
+
+  .fav-line-item{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }

@@ -25,13 +25,13 @@ const useLocaLStore = (): [Journey, (val: JourneyObject) => void] => {
     const entries = getJourneysFromLocalStorage();
     if (entries) {
       let journeyArr = JSON.parse(entries);
-      console.log("jArr", journeyArr)
+      console.log("jArr", journeyArr);
       if (journeyArr.length < 3) {
         let newJourneyArr = [...journeyArr, entry];
         const arrToString = JSON.stringify(newJourneyArr);
         localStorage.setItem(SAVED_JOURNEYS_KEY, arrToString);
       } else {
-        journeyArr = [entry, ...journeyArr.slice(1)];
+        journeyArr = [entry, ...journeyArr.slice(0,-1)];
         let newJourneyArr = JSON.stringify(journeyArr);
         localStorage.setItem(SAVED_JOURNEYS_KEY, newJourneyArr);
       }

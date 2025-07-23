@@ -21,7 +21,7 @@ export default function Line(props: any) {
       }}
       elevation={0}
     >
-      <span style={{fontWeight: '600'}}>{line}</span>
+      <span style={{fontWeight: '600'}} className="line-name">{line}</span>
       <Dot status= {status} color={statusColor}/>
     </Paper>
   );

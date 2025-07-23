@@ -41,6 +41,13 @@ body {
   border-radius: 5px;
 }
 
+.favourites-component {
+  border-radius: 5px;
+  background-color: rgb(225, 235, 238);
+
+}
+
+
 .top-left-section {
   flex: 0 0 auto;
   padding: 0.5rem;
@@ -48,7 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 35%;
+  height: 40%;
   gap: 1rem;
 }
 
@@ -84,7 +91,7 @@ body {
   padding-bottom: 200px;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 768px) {
   .layout-container {
     flex-direction: column;
     height: auto;
@@ -120,5 +127,7 @@ body {
     overflow: auto;
   }
 
-
+  .line-status {
+    font-size: 0.6rem;
+  }
 }
