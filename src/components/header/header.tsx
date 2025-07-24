@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Logo from "../../assets/tflLogo.svg";
 import { useNavigate } from "react-router-dom";
+import './header.css'
 
 export default function Header() {
 const navigate = useNavigate()
@@ -19,7 +20,7 @@ const navigate = useNavigate()
         justifyContent: "center",
         alignItems: "center",
         gap: 2,
-        height: '2rem',
+        height: '3.5rem',
         position: "relative",
         "&::before": {
           content: '""',
@@ -37,7 +38,6 @@ const navigate = useNavigate()
     >
       <div
         className="logo"
-        style={{ height: "3.5rem", zIndex: 1 }}
       >
       
         <img
@@ -56,7 +56,7 @@ const navigate = useNavigate()
         sx={{
           color: "white",
           fontWeight: 800,
-          fontSize: "2.6rem",
+          fontSize: {xs:"1.4rem", sm:"2.4rem", lg:"2.6rem"},
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           zIndex: 1,

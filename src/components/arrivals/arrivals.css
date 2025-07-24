@@ -37,3 +37,15 @@
   min-height: 0;
   padding-bottom: 1.2rem;
 }
+
+@media (max-width: 768px) {
+  .arrival-cards-container {
+   
+    min-height: 20vh;
+  }
+
+  .arrivals-title {
+    font-size: 1.2rem;
+    font-weight: 500
+  }
+}

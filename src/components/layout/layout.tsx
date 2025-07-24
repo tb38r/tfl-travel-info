@@ -23,6 +23,7 @@ export default function Layout() {
             </div>
               <Favourites/>
           </div>
+          <div className="bottom-left-section">
           <div
             style={{
               padding: "5px",
@@ -34,7 +35,6 @@ export default function Layout() {
           >
             Status Updates
           </div>
-          <div className="bottom-left-section">
             <div className="lines-component">
               <Lines />
             </div>

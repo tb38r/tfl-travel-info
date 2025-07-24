@@ -8,6 +8,11 @@ body {
   overflow: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+
 .app-container {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -30,6 +35,7 @@ body {
 .sidebar-section {
   width: 40%;
   display: flex;
+  overflow: auto;
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
@@ -64,12 +70,10 @@ body {
 .right-section {
   width: 60%;
   height: 100%;
-  padding: 1rem;
   background-color: ghostwhite;
   overflow: hidden;
   padding: 2rem;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -89,6 +93,7 @@ body {
   .layout-container {
     flex-direction: column;
     height: auto;
+    overflow:auto;
   }
 
   .sidebar-section {
@@ -101,16 +106,27 @@ body {
     height: auto;
   }
 
-  .right-section {
+  /* .right-section {
     order: 2;
     width: 100%;
     height: auto;
     overflow-y: auto;
+  } */
+
+  .right-section {
+    order: 2;
+    width: 100%;
+    min-height: 50vh; 
+    height: auto;
+    overflow-y: auto;
+    align-items: self-start;
   }
 
   .bottom-left-section {
     order: 3;
     max-height: 50vh;
+    padding: 0rem;
+
   }
   .home-content {
     padding-bottom: 0px;

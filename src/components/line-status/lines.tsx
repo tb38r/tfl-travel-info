@@ -38,7 +38,7 @@ export default function Lines() {
     })();
   }, []);
 
-  useLockBodyScroll();
+  // useLockBodyScroll();
 
   return lines.map((line, i) => {
     const severity = line.lineStatuses[0].statusSeverity;
@@ -47,6 +47,7 @@ export default function Lines() {
     const lineColour = TubeLineColors[lineName];
 
     return (
+      
       <span key={i}>
         <Line
           line={line?.name}

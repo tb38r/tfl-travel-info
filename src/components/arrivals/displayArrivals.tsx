@@ -89,9 +89,15 @@ export default function DisplayArrivals() {
         {availableLines.map((line, index) => (
           <ThemeProvider theme={ButtonsTheme} key={line}>
             <Button
+              sx={{
+                fontSize: { xs: "0.75rem", md: "1rem" },
+                padding: { xs: "4px 8px", md: "6px 16px" },
+                minWidth: { xs: "auto", md: "64px" },
+                backgroundColor: `${line}.main`,
+                cursor: "pointer",
+              }}
               key={line}
               variant={selectedButton === index ? "contained" : "outlined"}
-              sx={{ backgroundColor: `${line}.main`, cursor: "pointer" }}
               onClick={() => handleSelectedLine(line, index)}
             >
               {line}
