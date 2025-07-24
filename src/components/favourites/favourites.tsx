@@ -1,7 +1,6 @@
 import { useLocaLStore } from "../hooks/useLocalStore";
 import { Container } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import type { Journey } from "../journey-planner/types/journey-types";
 import FavouriteItem from "./favourite-item";
 import "./favourites.css";
 

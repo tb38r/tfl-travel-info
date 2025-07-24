@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import {  TubeLineColors, TubeLineNameMap } from "./types";
+import { TubeLineColors, TubeLineNameMap } from "./types";
 import { SeverityColorMap } from "./types";
+import { useLockBodyScroll } from "@uidotdev/usehooks";
 import Line from "./line";
 
 interface LineStatus {
@@ -37,6 +38,7 @@ export default function Lines() {
     })();
   }, []);
 
+  useLockBodyScroll();
 
   return lines.map((line, i) => {
     const severity = line.lineStatuses[0].statusSeverity;
