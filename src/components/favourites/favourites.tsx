@@ -35,7 +35,7 @@ export default function Favourites() {
           </div>
         <div className="favourites-container">
           {favToJSON.map((item: Items) => {
-            return <FavouriteItem from={item.from} to={item.to} key={item.id}/>;
+            return <FavouriteItem from={item.from} to={item.to} itemID={item.id} key={item.id}/>;
           })}
 
         </div>
