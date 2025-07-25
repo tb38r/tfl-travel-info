@@ -87,3 +87,9 @@ export interface Disruption {
   created: string;
   lastUpdate: string;
 }
+
+export interface FavouriteKeys {
+  from: string;
+  to: string;
+  id: string;
+}

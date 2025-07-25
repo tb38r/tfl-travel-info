@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { TubeLineColors, TubeLineNameMap } from "./types";
 import { SeverityColorMap } from "./types";
-import { useLockBodyScroll } from "@uidotdev/usehooks";
 import Line from "./line";
 
 interface LineStatus {

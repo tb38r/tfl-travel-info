@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
-import { LinearProgress, Tooltip, styled, tooltipClasses } from "@mui/material";
-import type { TooltipProps } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import { UndergroundStations } from "./types/undergroundStops";
 import type { JourneyResult } from "./types/journey-types";
 import { formatTime } from "../../utils/helpers";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import "./styles/journey-planner.css";
 import { useLocaLStore, type JourneyObject } from "../hooks/useLocalStore";
+import { LightTooltip } from "./styles/styles";
+import { IsFavourite } from "../../utils/helpers";
 
 export default function DisplayJourney() {
   const { from, to } = useParams();
@@ -16,20 +18,10 @@ export default function DisplayJourney() {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [data, setData] = useState<JourneyResult>();
-  const [_, saveJourney] = useLocaLStore();
+  const [journies, saveJourney, removeJourney] = useLocaLStore();
+  const [isFavourite, setIsFavourite] = useState(false);
 
   const apiKey = import.meta.env.VITE_API_KEY;
-
-  const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: theme.palette.common.white,
-      color: "#1976D2",
-      boxShadow: theme.shadows[1],
-      fontSize: 13,
-    },
-  }));
 
   useEffect(() => {
     setData(undefined);
@@ -74,6 +66,10 @@ export default function DisplayJourney() {
           }
 
           const data = await response.json();
+          IsFavourite(from, to, journies)
+            ? setIsFavourite(true)
+            : setIsFavourite(false);
+
           setData(data);
           setLoading(false);
         } catch (err) {
@@ -90,7 +86,11 @@ export default function DisplayJourney() {
     }
   }, [isInValid, from, to, apiKey]);
 
-  const SaveToLocalStorage = useCallback(() => {
+  const handleFavourite = useCallback(() => {
+    if (IsFavourite(from, to, journies) && from && to) {
+      removeJourney(from, to);
+      return;
+    }
     let id = Math.random().toString(36).substring(2, 6);
 
     const journeyToSave: JourneyObject = {
@@ -131,15 +131,21 @@ export default function DisplayJourney() {
                 {from?.replace(" Underground Station", "") || from} {"to"}{" "}
                 {to?.replace(" Underground Station", "") || to}
                 <span
-                  onClick={() => SaveToLocalStorage()}
+                  onClick={() => handleFavourite()}
                   style={{ cursor: "pointer" }}
                 >
                   <LightTooltip
                     title="Save Journey"
                     placement="left"
-                    style={{ color: "#C71585" }}
+                    style={{ color: "red" }}
+
+                    // style={{ color: "#C71585" }}
                   >
-                    <FavoriteIcon />
+                    {isFavourite ? (
+                      <FavoriteIcon />
+                    ) : (
+                      <FavoriteBorderOutlinedIcon />
+                    )}
                   </LightTooltip>
                 </span>
               </div>
