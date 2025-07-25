@@ -19,7 +19,7 @@ export default function DisplayJourney() {
   const [errorMsg, setErrorMsg] = useState("");
   const [data, setData] = useState<JourneyResult>();
   const [journies, saveJourney, removeJourney] = useLocaLStore();
-  const [isFavourite, setIsFavourite] = useState(false);
+  // const [isFavourite, setIsFavourite] = useState(false);
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -66,9 +66,9 @@ export default function DisplayJourney() {
           }
 
           const data = await response.json();
-          IsFavourite(from, to, journies)
-            ? setIsFavourite(true)
-            : setIsFavourite(false);
+          // IsFavourite(from, to, journies)
+          //   ? setIsFavourite(true)
+          //   : setIsFavourite(false);
 
           setData(data);
           setLoading(false);
@@ -99,7 +99,7 @@ export default function DisplayJourney() {
       [`id`]: id,
     };
     saveJourney(journeyToSave);
-  }, [from, to]);
+  }, [from, to, journies, saveJourney, removeJourney]);
 
   console.log("data from Journey", data);
 
@@ -141,7 +141,7 @@ export default function DisplayJourney() {
 
                     // style={{ color: "#C71585" }}
                   >
-                    {isFavourite ? (
+                    {IsFavourite(from, to, journies) ? (
                       <FavoriteIcon />
                     ) : (
                       <FavoriteBorderOutlinedIcon />

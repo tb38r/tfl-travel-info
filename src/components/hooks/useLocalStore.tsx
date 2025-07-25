@@ -12,10 +12,18 @@ const getJourneysFromLocalStorage = () => {
   return localStorage.getItem(SAVED_JOURNEYS_KEY);
 };
 
+// const subscribe = (callback: () => void): (() => void) => {
+//   window.addEventListener("storage", callback);
+//   return () => {
+//     window.removeEventListener("storage", callback);
+//   };
+// };
+
 const subscribe = (callback: () => void): (() => void) => {
-  window.addEventListener("storage", callback);
+  // Use a custom event name instead of 'storage'
+  window.addEventListener("journeys-updated", callback);
   return () => {
-    window.removeEventListener("storage", callback);
+    window.removeEventListener("journeys-updated", callback);
   };
 };
 
@@ -39,11 +47,11 @@ const useLocaLStore = (): [
         let newJourneyArr = JSON.stringify(journeyArr);
         localStorage.setItem(SAVED_JOURNEYS_KEY, newJourneyArr);
       }
-      window.dispatchEvent(new Event("storage"));
+      window.dispatchEvent(new Event("journeys-updated")); // Custom event name
     } else {
       const entryToString = JSON.stringify([entry]);
       localStorage.setItem(SAVED_JOURNEYS_KEY, entryToString);
-      window.dispatchEvent(new Event("storage"));
+      window.dispatchEvent(new Event("journeys-updated")); // Custom event name
     }
   };
 
@@ -52,11 +60,11 @@ const useLocaLStore = (): [
       let journeyArr = JSON.parse(entries);
 
       let updatedEntry = journeyArr.filter((entry: FavouriteKeys) => {
-        return entry.from != from || entry.to != to;
+        return !(entry.from === from && entry.to === to);
       });
       const updatedToString = JSON.stringify(updatedEntry);
       localStorage.setItem(SAVED_JOURNEYS_KEY, updatedToString);
-      window.dispatchEvent(new Event("storage"));
+      window.dispatchEvent(new Event("journeys-updated"));
     }
   };
 
