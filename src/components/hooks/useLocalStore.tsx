@@ -12,12 +12,6 @@ const getJourneysFromLocalStorage = () => {
   return localStorage.getItem(SAVED_JOURNEYS_KEY);
 };
 
-// const subscribe = (callback: () => void): (() => void) => {
-//   window.addEventListener("storage", callback);
-//   return () => {
-//     window.removeEventListener("storage", callback);
-//   };
-// };
 
 const subscribe = (callback: () => void): (() => void) => {
   // Use a custom event name instead of 'storage'
@@ -47,11 +41,11 @@ const useLocaLStore = (): [
         let newJourneyArr = JSON.stringify(journeyArr);
         localStorage.setItem(SAVED_JOURNEYS_KEY, newJourneyArr);
       }
-      window.dispatchEvent(new Event("journeys-updated")); // Custom event name
+      window.dispatchEvent(new Event("journeys-updated")); 
     } else {
       const entryToString = JSON.stringify([entry]);
       localStorage.setItem(SAVED_JOURNEYS_KEY, entryToString);
-      window.dispatchEvent(new Event("journeys-updated")); // Custom event name
+      window.dispatchEvent(new Event("journeys-updated")); 
     }
   };
 
