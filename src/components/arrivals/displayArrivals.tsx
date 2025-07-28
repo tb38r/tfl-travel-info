@@ -133,16 +133,19 @@ export default function DisplayArrivals() {
             ))}
         </div>
       )}
+
     </div>
   ) : (
-    <CircularProgress
-      color="secondary"
-      sx={{
-        size: {
-          sm: "2.5rem",
-          md: "5rem",
-        },
-      }}
-    />
+    <div className="arrivals-loading-icon">
+      <CircularProgress
+        color="secondary"
+        sx={{
+          size: {
+            sm: "4rem",
+            md: "6rem",
+          },
+        }}
+      />
+    </div>
   );
 }

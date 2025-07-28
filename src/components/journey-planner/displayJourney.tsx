@@ -19,7 +19,6 @@ export default function DisplayJourney() {
   const [errorMsg, setErrorMsg] = useState("");
   const [data, setData] = useState<JourneyResult>();
   const [journies, saveJourney, removeJourney] = useLocaLStore();
-  // const [isFavourite, setIsFavourite] = useState(false);
 
   const apiKey = import.meta.env.VITE_API_KEY;
 
@@ -66,9 +65,7 @@ export default function DisplayJourney() {
           }
 
           const data = await response.json();
-          // IsFavourite(from, to, journies)
-          //   ? setIsFavourite(true)
-          //   : setIsFavourite(false);
+        
 
           setData(data);
           setLoading(false);
@@ -135,11 +132,10 @@ export default function DisplayJourney() {
                   style={{ cursor: "pointer" }}
                 >
                   <LightTooltip
-                    title="Save Journey"
+                    title={IsFavourite(from, to, journies)? "Unmark Favourite": "Save to Favourites"}
                     placement="left"
                     style={{ color: "red" }}
 
-                    // style={{ color: "#C71585" }}
                   >
                     {IsFavourite(from, to, journies) ? (
                       <FavoriteIcon />
