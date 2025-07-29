@@ -107,12 +107,7 @@ body {
     height: auto;
   }
 
-  /* .right-section {
-    order: 2;
-    width: 100%;
-    height: auto;
-    overflow-y: auto;
-  } */
+
 
   .right-section {
     order: 2;
@@ -127,6 +122,7 @@ body {
     order: 3;
     max-height: 50vh;
     padding: 0rem;
+    padding-top:1.4rem
 
   }
   .home-content {

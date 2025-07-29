@@ -13,7 +13,6 @@ export default function Favourites() {
   const [favourites, _] = useLocaLStore();
 
   const favToJSON = favourites ? JSON.parse(favourites) : [];
-  console.log("fav to j", favToJSON);
 
   return (
     favourites && (
