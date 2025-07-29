@@ -27,11 +27,10 @@ export default function Header() {
         <Typography
           variant="h2"
           sx={{
-            color: "#1976d2",
+            color: "#1976D2",
             fontWeight: 800,
             fontSize: { xs: "1.3rem", sm: "1.8rem", lg: "2rem" },
             letterSpacing: "0.08em",
-            textTransform: "capitalize",
             textAlign: "center",
             position: "relative",
             cursor: "pointer",
@@ -47,7 +46,7 @@ export default function Header() {
             },
           }}
         >
-          Tube Tracker
+          tubetracker
         </Typography>
         <div className="logo" onClick={handleHome}>
           <img

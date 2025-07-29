@@ -1,4 +1,3 @@
-//export type JourneyResult = Journey[];
 
 export type JourneyResult ={
   journeys : Journey[];

@@ -13,11 +13,12 @@ export default function Favourites() {
   const [favourites, _] = useLocaLStore();
 
   const favToJSON = favourites ? JSON.parse(favourites) : [];
-
+  
+  if (favToJSON.length === 0) {
+    return null;
+  }
   return (
-    favourites && (
-        <div className="favourites-component">
-
+    <div className="favourites-component">
       <Container
         disableGutters
         sx={{
@@ -28,18 +29,22 @@ export default function Favourites() {
           padding: "0.5rem",
         }}
       >
-          <div className="fav-title-container">
-            <div className="favourites-title">Favourites</div>
-         
-          </div>
+        <div className="fav-title-container">
+          <div className="favourites-title">Favourites</div>
+        </div>
         <div className="favourites-container">
           {favToJSON.map((item: Items) => {
-            return <FavouriteItem from={item.from} to={item.to} itemID={item.id} key={item.id}/>;
+            return (
+              <FavouriteItem
+                from={item.from}
+                to={item.to}
+                itemID={item.id}
+                key={item.id}
+              />
+            );
           })}
-
         </div>
       </Container>
-      </div>
-    )
+    </div>
   );
 }

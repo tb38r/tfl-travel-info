@@ -98,7 +98,6 @@ export default function DisplayJourney() {
     saveJourney(journeyToSave);
   }, [from, to, journies, saveJourney, removeJourney]);
 
-  console.log("data from Journey", data);
 
   return (
     <>

@@ -14,7 +14,6 @@ const getJourneysFromLocalStorage = () => {
 
 
 const subscribe = (callback: () => void): (() => void) => {
-  // Use a custom event name instead of 'storage'
   window.addEventListener("journeys-updated", callback);
   return () => {
     window.removeEventListener("journeys-updated", callback);
@@ -24,7 +23,7 @@ const subscribe = (callback: () => void): (() => void) => {
 const useLocaLStore = (): [
   Journey,
   (val: JourneyObject) => void,
-  (from: string, to: string) => void
+  (from: string, to: string) => void,
 ] => {
   const journeys = useSyncExternalStore(subscribe, getJourneysFromLocalStorage);
   const entries = getJourneysFromLocalStorage();

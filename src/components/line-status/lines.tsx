@@ -37,7 +37,6 @@ export default function Lines() {
     })();
   }, []);
 
-  // useLockBodyScroll();
 
   return lines.map((line, i) => {
     const severity = line.lineStatuses[0].statusSeverity;

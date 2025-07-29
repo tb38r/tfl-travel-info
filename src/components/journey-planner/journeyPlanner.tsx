@@ -87,11 +87,10 @@ export default function JourneyPlanner() {
     if (journeyPlannerState.from === journeyPlannerState.to) {
       dispatch({
         type: "error",
-        destination: "Cannot navigate travel to & from the same destination",
+        destination: "Cannot navigate to & from the same destination",
       });
     } else {
       navigate(`/journey/${journeyPlannerState.from }/${journeyPlannerState.to }`)
-      console.log(journeyPlannerState.from, journeyPlannerState.to);
     }
   };
 
@@ -133,21 +132,3 @@ export default function JourneyPlanner() {
   );
 }
 
-// function PlannerInput(props: any) {
-//   const { placeholder } = props;
-
-//   return (
-//     <TextField
-//       sx={{
-//         width: "98%",
-//         "& .MuiOutlinedInput-root": {
-//           borderRadius: "10px",
-//           backgroundColor: 'white',
-//           height: '2.5rem'
-
-//         },
-//       }}
-//       placeholder={placeholder}
-//     />
-//   );
-// }
