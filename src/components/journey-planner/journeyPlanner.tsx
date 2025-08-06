@@ -1,9 +1,9 @@
-import { Container, IconButton } from "@mui/material";
-import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircleOutlined";
-import Search from "../search-bar/search";
-import { StopPoints } from "../search-bar/stop-points/stops";
+import { Container } from "@mui/material";
 import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
+import Search from "../search-bar/search";
+import { StopPoints } from "../search-bar/stop-points/stops";
+import GoButton from "./goButton";
 
 type Action =
   | { type: "from"; destination: string }
@@ -69,7 +69,7 @@ export default function JourneyPlanner() {
     journeyPlannerObj
   );
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleFromDestination = (dest: string) => {
     dispatch({ type: "from", destination: dest });
@@ -90,7 +90,9 @@ export default function JourneyPlanner() {
         destination: "Cannot navigate to & from the same destination",
       });
     } else {
-      navigate(`/journey/${journeyPlannerState.from }/${journeyPlannerState.to }`)
+      navigate(
+        `/journey/${journeyPlannerState.from}/${journeyPlannerState.to}`
+      );
     }
   };
 
@@ -108,12 +110,25 @@ export default function JourneyPlanner() {
     >
       <span style={{ color: "black", fontWeight: "500" }}>Journey Planner</span>
 
-      <Search
-        placeholder="From station"
-        updateStation={handleFromDestination}
-      />
-      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <IconButton>
+      <Search placeholder="Start" updateStation={handleFromDestination} />
+
+      <Search placeholder="End" updateStation={handleToDestination} />
+      {journeyPlannerState.error && (
+        <span style={{ color: "red" }} className="journey-error">
+          {journeyPlannerState.errorMsg}
+        </span>
+      )}
+      <div style={{ width: "100%", display: "flex", justifyContent: "right" }}>
+        <div className="go-button-container" onClick={() => handleSubmit()}>
+          <GoButton />
+        </div>
+      </div>
+    </Container>
+  );
+}
+
+/*
+     <IconButton>
           {" "}
           <SwapVerticalCircleIcon
             fontSize="large"
@@ -121,14 +136,5 @@ export default function JourneyPlanner() {
             onClick={() => handleSubmit()}
           />
         </IconButton>
-      </div>
-      <Search placeholder="To station" updateStation={handleToDestination} />
-      {journeyPlannerState.error && (
-        <span style={{ color: "red" }} className="journey-error">
-          {journeyPlannerState.errorMsg}
-        </span>
-      )}
-    </Container>
-  );
-}
 
+*/
