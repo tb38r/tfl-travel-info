@@ -1,5 +1,6 @@
-import { Container } from "@mui/material";
-import { useReducer } from "react";
+import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
+import { Container, IconButton } from "@mui/material";
+import { useCallback, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Search from "../search-bar/search";
 import { StopPoints } from "../search-bar/stop-points/stops";
@@ -69,6 +70,8 @@ export default function JourneyPlanner() {
     journeyPlannerObj
   );
 
+  const [toggleState, setToggleStates] = useState(journeyPlannerObj);
+
   const navigate = useNavigate();
 
   const handleFromDestination = (dest: string) => {
@@ -96,6 +99,16 @@ export default function JourneyPlanner() {
     }
   };
 
+  const handleToggle = useCallback(() => {
+    setToggleStates((prev) => ({
+      ...prev,
+      from: journeyPlannerState.to,
+      to: journeyPlannerState.from,
+    }));
+  }, [journeyPlannerState.from, journeyPlannerState.to]);
+
+  console.log('togstates', toggleState)
+
   return (
     <Container
       disableGutters
@@ -111,6 +124,17 @@ export default function JourneyPlanner() {
       <span style={{ color: "black", fontWeight: "500" }}>Journey Planner</span>
 
       <Search placeholder="Start" updateStation={handleFromDestination} />
+      <div
+        className="destination-toggle-container"
+      >
+        <IconButton>
+          <SwapVertRoundedIcon
+            fontSize="large"
+            sx={{ color: "rgb(101, 118, 233)", cursor: "pointer" }}
+            onClick={() => handleToggle()}
+          />
+        </IconButton>
+      </div>
 
       <Search placeholder="End" updateStation={handleToDestination} />
       {journeyPlannerState.error && (

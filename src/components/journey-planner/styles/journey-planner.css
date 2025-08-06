@@ -54,6 +54,15 @@
   cursor: pointer;
 }
 
+.go-button-container{
+  padding-top: 0.3rem;
+}
+
+.destination-toggle-container{
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   .journey-title {
     font-size: 1.7rem;
