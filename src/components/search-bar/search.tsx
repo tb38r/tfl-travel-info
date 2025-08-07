@@ -33,7 +33,6 @@ export default function Search({
       open={open}
       onOpen={(event) => {
         if (inputValue.length > 0 || event.type === "keydown") {
-          console.log("in here");
           setOpen(true);
         }
       }}
