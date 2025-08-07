@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { StopPoints } from "./stop-points/stops";
 
 interface searchProps {
@@ -33,14 +33,16 @@ export default function Search({
       open={open}
       onOpen={(event) => {
         if (inputValue.length > 0 || event.type === "keydown") {
+          console.log("in here");
           setOpen(true);
         }
       }}
       onClose={() => setOpen(false)}
       onInputChange={(event, newInputValue) => {
-        event.stopPropagation();
+        event?.stopPropagation();
         setInputValue(newInputValue);
-        if (newInputValue.length > 0) {
+        
+        if (newInputValue.length > 0  && event) {
           setOpen(true);
         } else {
           setOpen(false);
