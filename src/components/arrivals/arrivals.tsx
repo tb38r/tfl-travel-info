@@ -18,7 +18,7 @@ export default function Arrivals() {
 
   }, [station]);
 
-  return <Search updateStation={updateStation} placeholder="Get Station Arrivals"/>;
+  return <Search updateStation={updateStation} placeholder="Get Station Arrivals" value=""/>;
 }
 
 

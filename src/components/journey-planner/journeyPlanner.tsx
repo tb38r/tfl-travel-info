@@ -1,6 +1,6 @@
 import SwapVertRoundedIcon from "@mui/icons-material/SwapVertRounded";
 import { Container, IconButton } from "@mui/material";
-import { useCallback, useReducer, useState } from "react";
+import { useCallback, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import Search from "../search-bar/search";
 import { StopPoints } from "../search-bar/stop-points/stops";
@@ -70,7 +70,7 @@ export default function JourneyPlanner() {
     journeyPlannerObj
   );
 
-  const [toggleState, setToggleStates] = useState(journeyPlannerObj);
+  //const [toggleState, setToggleStates] = useState(journeyPlannerObj);
 
   const navigate = useNavigate();
 
@@ -100,14 +100,15 @@ export default function JourneyPlanner() {
   };
 
   const handleToggle = useCallback(() => {
-    setToggleStates((prev) => ({
-      ...prev,
-      from: journeyPlannerState.to,
-      to: journeyPlannerState.from,
-    }));
+   
+
+    dispatch({ type: "from", destination: journeyPlannerState.to });
+    dispatch({ type: "to", destination: journeyPlannerState.from });
+
+
   }, [journeyPlannerState.from, journeyPlannerState.to]);
 
-  console.log('togstates', toggleState)
+  //console.log('togstates', toggleState)
 
   return (
     <Container
@@ -123,7 +124,7 @@ export default function JourneyPlanner() {
     >
       <span style={{ color: "black", fontWeight: "500" }}>Journey Planner</span>
 
-      <Search placeholder="Start" updateStation={handleFromDestination} />
+      <Search placeholder="Start" updateStation={handleFromDestination} value={journeyPlannerState.from}/>
       <div
         className="destination-toggle-container"
       >
@@ -136,7 +137,7 @@ export default function JourneyPlanner() {
         </IconButton>
       </div>
 
-      <Search placeholder="End" updateStation={handleToDestination} />
+      <Search placeholder="End" updateStation={handleToDestination} value={journeyPlannerState.to}/>
       {journeyPlannerState.error && (
         <span style={{ color: "red" }} className="journey-error">
           {journeyPlannerState.errorMsg}
